@@ -92,7 +92,7 @@ void setup()
     deserializeJson(meteo, payload);
     int clouds = meteo["clouds"]["all"];
     int pwm = map(clouds, 0, 100, 50, 255);
-    luminosity = clouds;
+    luminosity = (pwm/255)*100;
     pwmSig = pwm;
     ledcWrite(channel, pwm); // Send a PWM signal generated from the cloud covergae percentage
   }
@@ -198,7 +198,7 @@ void loop()
           deserializeJson(meteo, payload);
           int clouds = meteo["clouds"]["all"];
           int pwm = map(clouds, 0, 100, 50, 255);
-          luminosity = clouds;
+          luminosity = (pwm/255)*100;
           pwmSig = pwm;
           ledcWrite(channel, pwm);
           
